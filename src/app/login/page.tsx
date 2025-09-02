@@ -3,12 +3,14 @@ import { LoginForm } from "@/components/auth/login-form"
 import Link from "next/link"
 
 interface LoginPageProps {
-  searchParams: {
+  searchParams: Promise<{
     message?: string
-  }
+  }>
 }
 
-export default function LoginPage({ searchParams }: LoginPageProps) {
+export default async function LoginPage({ searchParams }: LoginPageProps) {
+  const params = await searchParams
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <Card className="w-full max-w-md">
@@ -19,16 +21,16 @@ export default function LoginPage({ searchParams }: LoginPageProps) {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          {searchParams.message && (
+          {params.message && (
             <div className="mb-4 p-3 bg-green-50 border border-green-200 rounded-md">
               <p className="text-green-800 text-sm text-center">
-                {decodeURIComponent(searchParams.message)}
+                {decodeURIComponent(params.message)}
               </p>
             </div>
           )}
           <LoginForm />
           <div className="mt-6 text-center text-sm">
-            Don't have an account?{" "}
+            Don&apos;t have an account?{" "}
             <Link href="/register" className="text-blue-600 hover:underline">
               Sign up here
             </Link>

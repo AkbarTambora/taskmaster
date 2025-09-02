@@ -5,7 +5,6 @@ import bcrypt from "bcryptjs"
 import { prisma } from "@/lib/prisma"
 import { signIn } from "@/lib/auth"
 import { AuthError } from "next-auth"
-import { redirect } from "next/navigation"
 
 const RegisterSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
